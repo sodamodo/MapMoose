@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<style>{% block css %}
+{#    Created by Hardeep Asrani#}
+{#Don't remove credits and you're free to use this#}
+{#Blog - hardeepasrani.blogspot.com#}
+{#Download This At - css-box.blogspot.com#}
+
+body {
+	background: url(https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/Background.jpg) bottom no-repeat;
+	background-color:58169a;
+}
+
+
+span.start {
+	color:white;
+	font-size:2em;
+
+}
+
+.credits {
+	color:white;
+	text-align:right;
+	text-decoration:none;
+	font-weight: bold;
+}
+
+
+.metro-surface{
+	padding: 40px 0px 0px 0px;
+    margin-top: 40px;
+}
+
+
+.metro-tile {
+	background-color: #D8512B;
+	border-color: #DC6241;
+	width: 464px;
+	height: 208px;
+	padding: 5px;
+	color: #FFF;
+	font-family: sans-serif;
+	font-size: 12px;
+	border-width: 3px;
+	border-style: solid;
+	cursor: default;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+    transform-style: preserve-3d;
+	transition: 0.5s all;
+
+}
+
+
+.metro-tile-small {
+	width: 104px;
+	height: 104px;
+}
+
+
+.metro-tile-store {
+	background: url(https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/Store.png);
+	background-color: #2878EC;
+	border-color: #2878EC;
+}
+
+
+.metro-tile-xbox {
+	background: url(https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/XBox.png);
+	background-position: 8px 8px;
+        background-color:#6CB71E;
+        border-color:#6CB71E;
+}
+
+.metro-tile-music {
+	background: url('https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/Music.png');
+        background-color: #D8512B;
+	border-color: #D8512B;
+}
+
+
+.metro-tile-ie {
+	background: url('https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/IE.png');
+        background-color: #2878EC;
+	border-color: #2878EC;
+}
+
+
+div.metro-tile:hover {
+	-webkit-transform: scale(0.97) perspective(400px) rotateY(0deg) rotateX(0deg);
+	-moz-transform: scale(0.97) perspective(400px) rotateY(0deg) rotateX(0deg);
+	-ms-transform: scale(0.97) perspective(400px) rotateY(0deg) rotateX(0deg);
+	transform: scale(0.97) perspective(400px) rotateY(0deg) rotateX(0deg);
+	border-width: 3px;
+	border-style:solid;
+}
+{%  endblock %}
+</style>
+
+{% block content %}
+
+<br><br>
+
+<center>
+<div class="metro-surface">
+<table>
+  <tr>
+   <td><div class="metro-tile metro-tile-small metro-tile-store">Uploaded Files:</div></td>
+{% for project in project_list %}
+
+{#                need another if block here to throw a blank tile in the front after project index >= 1#}
+	  <tr>
+   <td><div class="metro-tile metro-tile-small metro-tile-xbox">{{ project.title }}</div></td>
+   <td><a href="/style/{{project.pk}}"><div class="metro-tile metro-tile-small metro-tile-music">Click here to style vector</div></a></td>
+	<td><a href="/map/{{project.pk}}"><div class="metro-tile metro-tile-small metro-tile-music">Click here to display map</div></a></td>
+   <!--<td><div class="metro-tile metro-tile-small metro-tile-ie">Click here to style basemap</div></td>-->
+	</tr>
+{% endfor %}
+  </tr>
+  </table>
+</div>
+</center>
+
+{% endblock %}

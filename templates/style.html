@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+#center {
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 5%;
+
+}
+
+</style>
+{% endblock %}
+
+
+
+
+{% block content %}
+<div id="center">
+
+<form class="form-horizontal" action=/save_style/>
+<input type="hidden" name="style_id" value={{style_id}}>
+<fieldset>
+
+<!-- Form Name -->
+<legend>Style</legend>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="fillClr">Fill Color</label>
+  <div class="col-md-4">
+    <select id="attribute" name="attributes" class="form-control">
+      {% for attribute in attributes %}
+      <option value="{{attribute}}">{{attribute}}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="fillClr">Fill Color</label>
+  <div class="col-md-4">
+    <select id="fillClr" name="fillClr" class="form-control">
+      <option value="red">red</option>
+      <option value="green">green</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="weight">Line Weight</label>
+  <div class="col-md-4">
+    <select id="weight" name="weight" class="form-control">
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="color">Line Color</label>
+  <div class="col-md-4">
+    <select id="color" name="color" class="form-control">
+      <option value="green">Green</option>
+      <option value="red">Red</option>
+      <option value="blue">Blue</option>
+      <option value="yellow">Yellow</option>
+      <option value="orange">Orange</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="dashArray">Line Dashes</label>
+  <div class="col-md-4">
+    <select id="dashArray" name="dashArray" class="form-control">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="fillOpacity">Fill Opacity</label>
+  <div class="col-md-4">
+    <select id="fillOpacity" name="fillOpacity" class="form-control">
+      <option value=".1">10%</option>
+      <option value=".2">20%</option>
+      <option value=".3">30%</option>
+      <option value=".4">40%</option>
+      <option value=".5">50%</option>
+      <option value=".6">60%</option>
+      <option value=".7">70%</option>
+      <option value=".8">80%</option>
+      <option value=".9">90%</option>
+      <option value="1">100%</option>
+    </select>
+  </div>
+</div>
+
+</fieldset>
+  <input type="submit" value="Submit">
+</form>
+
+</div>
+{% endblock %}

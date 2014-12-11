@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css">
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script type="text/javascript" src="{% static "Mapski/geostats.js" %}"></script>
+<style>
+#map {
+    height:800px;
+    margin-left:auto;
+    margin-right:auto;
+}
+</style>
+{% endblock %}
+
+
+
+
+{% block content %}
+
+    <div id="map" style="width: 1200px; height: 800px">  </div>
+
+	<script>
+
+    // I may end up needing to pass in attribute
+    function getColor(d) {
+
+        return d > 5 ? '#f7fcf5' :
+           d > 10  ? '#e5f5e0' :
+           d > 20  ? '#c7e9c0' :
+           d > 25  ? '#a1d99b' :
+           d > 30  ? '#74c476' :
+           d > 35   ? '#74c476' :
+           d > 45   ? '#41ab5d' :
+                             '#238b45';
+    }
+
+		var map = L.map('map').setView([33.88, -83.34], 10);
+
+
+
+
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'examples.map-i86knfo3'
+		}).addTo(map);
+
+        // I think Ill need to pass the breaks into here?
+        function style(feature) {
+			return {
+                fillColor:getColor(feature.properties.STATE_FIPS), // The acres field needs to change from ACRES to whatever attribute becomes, obviously
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7
+
+			};
+		}
+
+//        var attribute = "ACRES";
+//        var items = []; // will store values
+//        var json =
+//        console.log(json.features[0].STATE_FIPS);
+//        arr = json.features;
+//
+//    for ( var i = 0, l = arr.length; i < l; i++ ) {
+//        items.push(arr[i].properties.STATE_FIPS); // needs to be replaced with attribute template tag
+//    }
+//
+////    Creates jenks breaks, not sure how setPrecision works
+//    series = new geostats(items);
+//    series.setPrecision(6);
+//    var breaks = series.getClassJenks(7);
+//
+//    console.log(items);
+//
+//    console.log(breaks);
+
+    L.geoJson( {{ json | safe }}, {style:style}).addTo(map);
+
+
+
+
+
+
+	</script>
+
+{% endblock %}
